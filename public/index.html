@@ -341,13 +341,12 @@ async function generateAICaption(){
   btn.disabled=true;btn.textContent='Thinking...';
   try{
     const b64=currentBase64.split(',')[1],mt=currentBase64.split(';')[0].split(':')[1];
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:150,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:mt,data:b64}},{type:'text',text:'This photo is being uploaded to a 50th birthday celebration page for Lewis King, an EY International Tax Partner, proud UNC Tar Heel, father to his son Will, and foodie from Atlanta. Write a short, warm, celebratory caption (1-2 sentences max). Be fun and personal. No quotation marks.'}]}]})
+    const res=await fetch('/api/caption',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({image:b64,mediaType:mt})
     });
     const data=await res.json();
-    const txt=data.content?.[0]?.text||'';
-    if(txt)cap.value=txt;else cap.placeholder='AI unavailable — please type a caption!';
+    if(data.caption)cap.value=data.caption;else cap.placeholder='AI unavailable — please type a caption!';
   }catch(e){console.error(e);cap.placeholder='AI unavailable — please type a caption!'}
   finally{btn.disabled=false;btn.textContent='\u2728 AI Caption'}
 }
