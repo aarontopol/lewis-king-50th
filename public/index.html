@@ -140,8 +140,6 @@
     <h3>Add a Photo</h3>
     <div class="modal-file-counter" id="modal-file-counter"></div>
     <img class="modal-preview" id="modal-preview" src="" alt="Preview">
-    <label for="modal-uploader-name">Your Name</label>
-    <input type="text" id="modal-uploader-name" placeholder="e.g., Jane Smith">
     <label for="modal-caption">Caption <span style="font-weight:400;text-transform:none;font-size:0.75rem">(or use AI below)</span></label>
     <textarea id="modal-caption" placeholder="Describe this photo..."></textarea>
     <div class="modal-actions">
@@ -352,7 +350,7 @@ async function generateAICaption(){
 }
 
 async function confirmUpload(){
-  const btn=document.getElementById('btn-confirm-upload'),cap=document.getElementById('modal-caption').value.trim(),who=document.getElementById('modal-uploader-name').value.trim(),status=document.getElementById('upload-status');
+  const btn=document.getElementById('btn-confirm-upload'),cap=document.getElementById('modal-caption').value.trim(),status=document.getElementById('upload-status');
   if(!cap){alert('Please add a caption (or click AI Caption to generate one).');return}
   btn.disabled=true;btn.textContent='Uploading...';
   const file=pendingFiles[currentFileIndex];
@@ -361,7 +359,7 @@ async function confirmUpload(){
     const ref=storage.ref('photos/'+fn);
     const snap=await ref.put(file);
     const url=await snap.ref.getDownloadURL();
-    await db.collection('photos').add({url,caption:cap,uploadedBy:who||'Anonymous',fileName:file.name,uploadedAt:firebase.firestore.FieldValue.serverTimestamp()});
+    await db.collection('photos').add({url,caption:cap,fileName:file.name,uploadedAt:firebase.firestore.FieldValue.serverTimestamp()});
     currentFileIndex++;
     if(currentFileIndex<pendingFiles.length){btn.disabled=false;btn.textContent='Upload';showUploadModal(pendingFiles[currentFileIndex])}
     else{document.getElementById('upload-modal').classList.remove('active');document.body.style.overflow='';status.textContent=pendingFiles.length+' photo(s) uploaded!';setTimeout(()=>status.textContent='',4000);pendingFiles=[];currentFileIndex=0;currentBase64=''}
@@ -379,7 +377,7 @@ db.collection('photos').orderBy('uploadedAt','asc').onSnapshot(snap=>{
     item.onclick=function(){openLightbox(this.querySelector('img'))};
     const img=document.createElement('img');img.src=d.url;img.alt=d.caption||'Photo for Lewis King';img.loading='lazy';
     item.appendChild(img);
-    if(d.caption){const c=document.createElement('div');c.className='photo-caption';c.textContent=d.caption+(d.uploadedBy&&d.uploadedBy!=='Anonymous'?' \u2014 '+d.uploadedBy:'');item.appendChild(c)}
+    if(d.caption){const c=document.createElement('div');c.className='photo-caption';c.textContent=d.caption;item.appendChild(c)}
     grid.appendChild(item);
     addToSideColumns(d.url);
   });

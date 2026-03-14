@@ -39,22 +39,14 @@ export default async function handler(req, res) {
             },
             {
               type: 'text',
-              text: `You are writing a photo caption for a 50th birthday celebration website for Lewis King. Here is what you need to know about Lewis:
+              text: `Write a photo caption for Lewis King's 50th birthday website. About Lewis: bald man, big smile, EY International Tax Partner, UNC Tar Heel, grew up in Murphy NC with brother Stephen, son named Will, lived in Atlanta/London/NYC/Charlotte, studied in Madrid, speaks Spanish, foodie, cocktail lover, famously witty and patient.
 
-- He is a bald/balding man, often smiling, with a warm and friendly face
-- He is an International Tax Partner at EY (Ernst & Young)
-- He is a proud UNC Chapel Hill Tar Heel
-- He grew up in Murphy, North Carolina with his brother Stephen
-- He has a son named Will
-- He lived and worked in Atlanta, London, New York, Charlotte, and studied abroad in Madrid
-- He speaks fluent Spanish
-- He is a self-described foodie and cocktail connoisseur
-- He was designated "The Most Patient Man in New York" in 2024
-- He is known for his legendary wit, warmth, and patience
+If Lewis is in the photo, name him and be witty about what he's doing. Keep it SHORT — one sentence, casual and fun, like these examples:
+- "Prost! Lewis living his best life at Oktoberfest — lederhosen and all."
+- "Always the life of the party — some things never change!"
+- "Like father, like son — Lewis and Will decked out in beads at Mardi Gras!"
 
-If Lewis appears in the photo, mention him by name and be witty about what he is doing. If Lewis is not in the photo, write a warm caption that ties the photo to his celebration.
-
-Write exactly ONE short, witty, warm caption (1-2 sentences max). Do NOT use quotation marks around the caption. Be clever and fun — match Lewis's legendary wit.`
+Write exactly one sentence. No quotation marks.`
             }
           ]
         }]
