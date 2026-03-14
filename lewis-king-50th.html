@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 50th Birthday, Lewis King!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --ey-yellow: #FFE600;
+    --ey-dark: #2E2E38;
+    --gold: #C9A84C;
+    --gold-light: #F0E2C0;
+    --navy: #1B2A4A;
+    --navy-deep: #0F1A2E;
+    --cream: #FAF6EF;
+    --warm-white: #FFFDF8;
+    --white: #FFFFFF;
+    --text-dark: #2A2A35;
+    --text-muted: #6B6B78;
+    --photo-col-width: 220px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lora', serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  #confetti-canvas {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 1000;
+  }
+
+  /* ═══ PHOTO COLUMNS ═══ */
+  .photo-column {
+    position: fixed; top: 0;
+    width: var(--photo-col-width);
+    height: 100vh; z-index: 50;
+    overflow: hidden; pointer-events: none;
+  }
+  .photo-column.left { left: 0; }
+  .photo-column.right { right: 0; }
+  .photo-column .photo-strip {
+    display: flex; flex-direction: column;
+    gap: 12px; padding: 12px;
+    animation: scrollPhotos 40s linear infinite;
+  }
+  .photo-column.right .photo-strip {
+    animation: scrollPhotosReverse 45s linear infinite;
+  }
+  @keyframes scrollPhotos {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+  @keyframes scrollPhotosReverse {
+    0% { transform: translateY(-50%); }
+    100% { transform: translateY(0); }
+  }
+  .photo-column .photo-strip img {
+    width: 100%; border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+    display: block; pointer-events: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .photo-column .photo-strip img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.35);
+  }
+  .photo-column::before, .photo-column::after {
+    content: ''; position: absolute;
+    left: 0; right: 0; height: 80px;
+    z-index: 2; pointer-events: none;
+  }
+  .photo-column::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--cream) 0%, transparent 100%);
+  }
+  .photo-column::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--cream) 0%, transparent 100%);
+  }
+
+  /* ═══ MAIN CONTENT ═══ */
+  .main-content {
+    margin-left: var(--photo-col-width);
+    margin-right: var(--photo-col-width);
+    position: relative; z-index: 10;
+  }
+
+  /* ═══ HERO ═══ */
+  .hero {
+    position: relative; min-height: 100vh;
+    display: flex; align-items: center;
+    justify-content: center; text-align: center;
+    background: linear-gradient(160deg, var(--navy-deep) 0%, #1E3156 40%, var(--navy) 100%);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(201,168,76,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 60%, rgba(255,230,0,0.06) 0%, transparent 50%);
+    animation: shimmer 10s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(1%,0.5%) scale(1.02); }
+  }
+  .hero::after {
+    content: ''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: 0.4; pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; padding: 2rem; }
+  .hero-badge {
+    display: inline-block; background: var(--ey-yellow);
+    color: var(--ey-dark); font-family: 'Montserrat', sans-serif;
+    font-weight: 600; font-size: 0.8rem; letter-spacing: 3.5px;
+    text-transform: uppercase; padding: 0.55rem 1.8rem;
+    border-radius: 30px; margin-bottom: 2.5rem;
+    box-shadow: 0 4px 20px rgba(255,230,0,0.25);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900; color: var(--white);
+    line-height: 1.1; margin-bottom: 0.3rem; letter-spacing: -0.02em;
+  }
+  .hero h1 .gold { color: var(--ey-yellow); }
+  .hero .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2.8vw, 1.8rem);
+    color: var(--gold); font-weight: 400;
+    font-style: italic; margin-bottom: 1.5rem;
+  }
+  .hero .role {
+    font-family: 'Montserrat', sans-serif; font-size: 0.95rem;
+    color: rgba(255,255,255,0.55); font-weight: 300; letter-spacing: 1.5px;
+  }
+  .hero .role strong { color: var(--ey-yellow); font-weight: 600; }
+  .big-50 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(8rem, 22vw, 18rem); font-weight: 900;
+    color: rgba(255,230,0,0.05); position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    z-index: 1; user-select: none; letter-spacing: -0.05em;
+  }
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%;
+    transform: translateX(-50%); z-index: 5;
+    color: rgba(255,255,255,0.3); font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .scroll-hint::after {
+    content: ''; display: block; width: 1px; height: 35px;
+    background: rgba(255,255,255,0.2); margin: 8px auto 0;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ═══ COUNTDOWN ═══ */
+  .countdown-section {
+    background: var(--ey-yellow); padding: 1.8rem 2rem; text-align: center;
+  }
+  .countdown-section h3 {
+    font-family: 'Playfair Display', serif; color: var(--navy);
+    font-size: 1.2rem; margin-bottom: 0.8rem; font-weight: 700;
+  }
+  .countdown { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+  .countdown-item { text-align: center; }
+  .countdown-item .number {
+    font-family: 'Playfair Display', serif; font-size: 2.5rem;
+    font-weight: 900; color: var(--navy);
+  }
+  .countdown-item .label {
+    font-family: 'Montserrat', sans-serif; font-size: 0.7rem;
+    text-transform: uppercase; letter-spacing: 2.5px;
+    color: var(--navy); font-weight: 500; opacity: 0.7;
+  }
+
+  /* ═══ SECTIONS ═══ */
+  section { padding: 5rem 2.5rem; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    text-align: center; margin-bottom: 0.8rem;
+    color: var(--navy); font-weight: 900; letter-spacing: -0.01em;
+  }
+  .section-divider {
+    width: 60px; height: 3px; background: var(--gold);
+    margin: 0 auto 1rem; border-radius: 2px;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--text-muted); font-weight: 400;
+    max-width: 550px; margin: 0 auto 3rem; line-height: 1.7; font-size: 1rem;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  /* ═══ ABOUT ═══ */
+  .about { background: var(--warm-white); }
+  .about-content {
+    max-width: 720px; margin: 0 auto; text-align: left;
+    font-size: 1.05rem; line-height: 1.9; color: #444;
+  }
+  .about-content p { margin-bottom: 1.5rem; }
+  .about-content .dropcap::first-letter {
+    font-family: 'Playfair Display', serif; font-size: 3.5rem;
+    float: left; line-height: 0.8; margin-right: 0.5rem;
+    margin-top: 0.15rem; color: var(--navy); font-weight: 900;
+  }
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+  .stat-card {
+    text-align: center; padding: 2rem 1.2rem; background: var(--cream);
+    border-radius: 12px; border: 1px solid var(--gold-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px); box-shadow: 0 8px 30px rgba(201,168,76,0.12);
+  }
+  .stat-card .stat-number {
+    font-family: 'Playfair Display', serif; font-size: 2.2rem;
+    font-weight: 900; color: var(--gold);
+  }
+  .stat-card .stat-label {
+    font-family: 'Montserrat', sans-serif; font-size: 0.78rem;
+    color: var(--text-muted); margin-top: 0.4rem;
+    letter-spacing: 0.3px; line-height: 1.4;
+  }
+
+  /* ═══ TIMELINE ═══ */
+  .timeline-section { background: var(--cream); }
+  .timeline {
+    position: relative; max-width: 650px;
+    margin: 0 auto; padding-left: 45px;
+  }
+  .timeline::before {
+    content: ''; position: absolute; left: 16px;
+    top: 0; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--ey-yellow), var(--gold));
+  }
+  .timeline-item {
+    position: relative; margin-bottom: 2.5rem; padding-left: 28px;
+  }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -36px; top: 6px;
+    width: 12px; height: 12px; background: var(--gold);
+    border-radius: 50%; border: 3px solid var(--cream);
+    box-shadow: 0 0 0 2px var(--gold);
+  }
+  .timeline-item .year {
+    font-family: 'Montserrat', sans-serif; font-size: 0.8rem;
+    font-weight: 700; color: var(--gold); letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 0.4rem;
+  }
+  .timeline-item .event-title {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem;
+    font-weight: 700; color: var(--navy); margin-bottom: 0.3rem;
+  }
+  .timeline-item .event { color: #555; line-height: 1.7; font-size: 0.95rem; }
+
+  /* ═══ GALLERY ═══ */
+  .gallery-section { background: var(--warm-white); }
+  .gallery-grid {
+    columns: 2; column-gap: 1.5rem; max-width: 800px; margin: 0 auto;
+  }
+  .gallery-item {
+    break-inside: avoid; margin-bottom: 1.5rem; border-radius: 12px;
+    overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer; background: var(--white);
+  }
+  .gallery-item:hover {
+    transform: translateY(-4px); box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+  }
+  .gallery-item img { width: 100%; display: block; }
+  .photo-caption {
+    padding: 0.8rem 1rem; font-size: 0.85rem;
+    color: var(--text-muted); font-style: italic;
+    line-height: 1.5; font-family: 'Lora', serif;
+  }
+  .add-photos-bar { text-align: center; margin-top: 2.5rem; }
+  .add-photos-btn {
+    display: inline-block; padding: 0.8rem 2rem;
+    background: transparent; border: 2px solid var(--gold);
+    color: var(--gold); font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem; font-weight: 600; letter-spacing: 1px;
+    cursor: pointer; border-radius: 8px; transition: all 0.3s ease;
+  }
+  .add-photos-btn:hover { background: var(--gold); color: var(--white); }
+
+  /* ═══ GUESTBOOK ═══ */
+  .guestbook {
+    background: linear-gradient(160deg, var(--navy-deep) 0%, #1E3156 40%, var(--navy) 100%);
+  }
+  .guestbook .section-title { color: var(--white); }
+  .guestbook .section-divider { background: var(--ey-yellow); }
+  .guestbook .section-subtitle { color: rgba(255,255,255,0.5); }
+  .guestbook-form {
+    max-width: 580px; margin: 0 auto 3rem;
+    background: rgba(255,255,255,0.06); backdrop-filter: blur(12px);
+    border-radius: 16px; padding: 2.5rem;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .form-group { margin-bottom: 1.5rem; }
+  .form-group label {
+    display: block; color: var(--gold); font-family: 'Montserrat', sans-serif;
+    font-weight: 500; margin-bottom: 0.5rem; font-size: 0.8rem;
+    letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .form-group input, .form-group textarea {
+    width: 100%; padding: 0.85rem 1rem;
+    border: 1px solid rgba(255,255,255,0.15); border-radius: 8px;
+    background: rgba(255,255,255,0.04); color: var(--white);
+    font-family: 'Lora', serif; font-size: 1rem; transition: border-color 0.3s;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+  .form-group input:focus, .form-group textarea:focus {
+    outline: none; border-color: var(--ey-yellow); background: rgba(255,255,255,0.07);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .submit-btn {
+    width: 100%; padding: 1rem; background: var(--ey-yellow);
+    color: var(--ey-dark); border: none; border-radius: 8px;
+    font-family: 'Montserrat', sans-serif; font-size: 0.9rem;
+    font-weight: 700; cursor: pointer; transition: all 0.3s;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  .submit-btn:hover {
+    background: #FFD700; transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(255,230,0,0.3);
+  }
+  .messages-container { max-width: 650px; margin: 0 auto; }
+  .message-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; padding: 1.5rem 2rem;
+    margin-bottom: 1rem; animation: fadeIn 0.5s ease;
+    border-left: 3px solid var(--gold);
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .message-card .msg-author {
+    color: var(--ey-yellow); font-family: 'Montserrat', sans-serif;
+    font-weight: 600; font-size: 0.95rem; margin-bottom: 0.4rem;
+  }
+  .message-card .msg-text {
+    color: rgba(255,255,255,0.75); line-height: 1.7;
+    font-weight: 400; font-size: 0.95rem;
+  }
+  .message-card .msg-date {
+    color: rgba(255,255,255,0.25); font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem; margin-top: 0.6rem;
+  }
+  .export-bar { text-align: center; margin-top: 2rem; }
+  .export-btn {
+    padding: 0.6rem 1.4rem; background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.45); border-radius: 6px;
+    font-family: 'Montserrat', sans-serif; font-size: 0.8rem;
+    cursor: pointer; transition: all 0.3s; margin: 0 0.3rem;
+  }
+  .export-btn:hover { border-color: var(--ey-yellow); color: var(--ey-yellow); }
+
+  /* ═══ FOOTER ═══ */
+  footer {
+    text-align: center; padding: 3rem 2rem; background: var(--ey-dark);
+    color: rgba(255,255,255,0.35); font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem; letter-spacing: 0.5px;
+  }
+  footer .ey-logo {
+    font-weight: 700; color: var(--ey-yellow);
+    font-size: 1.3rem; margin-bottom: 0.5rem; letter-spacing: 2px;
+  }
+
+  /* ═══ LIGHTBOX ═══ */
+  .lightbox-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.92); z-index: 2000;
+    align-items: center; justify-content: center; cursor: pointer;
+  }
+  .lightbox-overlay.active { display: flex; }
+  .lightbox-overlay img {
+    max-width: 90%; max-height: 90vh; border-radius: 8px;
+    box-shadow: 0 10px 60px rgba(0,0,0,0.5);
+  }
+  .lightbox-close {
+    position: absolute; top: 1.5rem; right: 2rem;
+    color: white; font-size: 2rem; cursor: pointer;
+    font-family: 'Montserrat', sans-serif; font-weight: 300;
+    opacity: 0.7; transition: opacity 0.3s;
+  }
+  .lightbox-close:hover { opacity: 1; }
+
+  /* ═══ SCROLL ANIMATIONS ═══ */
+  .reveal {
+    opacity: 0; transform: translateY(25px);
+    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 1100px) { :root { --photo-col-width: 170px; } }
+  @media (max-width: 900px) {
+    .photo-column { display: none; }
+    .main-content { margin-left: 0; margin-right: 0; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    section { padding: 3.5rem 1.2rem; }
+    .guestbook-form { padding: 1.5rem; }
+    .countdown { gap: 1rem; }
+    .stat-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .gallery-grid { columns: 1; }
+    .hero h1 { font-size: clamp(2.2rem, 9vw, 3.5rem); }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" alt="Full-size photo">
+</div>
+
+<!-- ═══ PHOTO COLUMNS ═══ -->
+<div class="photo-column left">
+  <div class="photo-strip" id="strip-left">
+    <img src="LK image 1.jpg" alt="Lewis at Oktoberfest" onclick="openLightbox(this)">
+    <img src="IMG_8172.jpeg" alt="Lewis throwback" onclick="openLightbox(this)">
+    <img src="LK Image 3.jpg" alt="Lewis with EY team" onclick="openLightbox(this)">
+    <img src="LK 8.jpg" alt="The King brothers" onclick="openLightbox(this)">
+    <img src="LK 4.jpg" alt="Sunday school" onclick="openLightbox(this)">
+    <!-- duplicate for loop -->
+    <img src="LK image 1.jpg" alt="Lewis at Oktoberfest" onclick="openLightbox(this)">
+    <img src="IMG_8172.jpeg" alt="Lewis throwback" onclick="openLightbox(this)">
+    <img src="LK Image 3.jpg" alt="Lewis with EY team" onclick="openLightbox(this)">
+    <img src="LK 8.jpg" alt="The King brothers" onclick="openLightbox(this)">
+    <img src="LK 4.jpg" alt="Sunday school" onclick="openLightbox(this)">
+  </div>
+</div>
+
+<div class="photo-column right">
+  <div class="photo-strip" id="strip-right">
+    <img src="LK Image2.jpg" alt="Lewis at theme park" onclick="openLightbox(this)">
+    <img src="IMG_8171.jpeg" alt="Lewis throwback" onclick="openLightbox(this)">
+    <img src="LK8.jpg" alt="Lewis and Will at Mardi Gras" onclick="openLightbox(this)">
+    <img src="LK image 1.jpg" alt="Lewis at Oktoberfest" onclick="openLightbox(this)">
+    <img src="LK 4.jpg" alt="Sunday school" onclick="openLightbox(this)">
+    <!-- duplicate for loop -->
+    <img src="LK Image2.jpg" alt="Lewis at theme park" onclick="openLightbox(this)">
+    <img src="IMG_8171.jpeg" alt="Lewis throwback" onclick="openLightbox(this)">
+    <img src="LK8.jpg" alt="Lewis and Will at Mardi Gras" onclick="openLightbox(this)">
+    <img src="LK image 1.jpg" alt="Lewis at Oktoberfest" onclick="openLightbox(this)">
+    <img src="LK 4.jpg" alt="Sunday school" onclick="openLightbox(this)">
+  </div>
+</div>
+
+<!-- ═══ MAIN CONTENT ═══ -->
+<div class="main-content">
+
+  <section class="hero">
+    <div class="big-50">50</div>
+    <div class="hero-content">
+      <div class="hero-badge">March 27, 2026</div>
+      <h1>Happy <span class="gold">50th</span> Birthday</h1>
+      <h1>Lewis King</h1>
+      <p class="subtitle">Half a Century of Excellence</p>
+      <p class="role">International Tax Partner at <strong>EY</strong> &bull; Tar Heel &bull; Foodie &bull; Father</p>
+    </div>
+    <div class="scroll-hint">Scroll</div>
+  </section>
+
+  <div class="countdown-section">
+    <h3>Countdown to the Big Day</h3>
+    <div class="countdown" id="countdown">
+      <div class="countdown-item"><div class="number" id="cd-days">--</div><div class="label">Days</div></div>
+      <div class="countdown-item"><div class="number" id="cd-hours">--</div><div class="label">Hours</div></div>
+      <div class="countdown-item"><div class="number" id="cd-mins">--</div><div class="label">Minutes</div></div>
+      <div class="countdown-item"><div class="number" id="cd-secs">--</div><div class="label">Seconds</div></div>
+    </div>
+  </div>
+
+  <section class="about">
+    <div class="container reveal">
+      <h2 class="section-title">Celebrating Lewis King</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">From Murphy, North Carolina to the global stage &mdash; a life defined by dedication, expertise, and great taste in cocktails</p>
+      <div class="about-content">
+        <p class="dropcap">
+          Born and raised in Murphy, North Carolina, Lewis King grew up with his brother Stephen
+          in the heart of the Blue Ridge Mountains before heading east to attend the
+          University of North Carolina at Chapel Hill &mdash; a proud Tar Heel through and through.
+          Ever the adventurer, Lewis spent a semester studying abroad in Madrid, where he
+          picked up Spanish (yes, he's fluent!) and no doubt developed his refined palate
+          for international cuisine and cocktails.
+        </p>
+        <p>
+          Lewis launched his EY career in Atlanta before taking on London, then New York,
+          and Charlotte &mdash; leaving his mark at each stop. His expertise in international
+          tax has guided major multinational clients including Cox, Equifax, and International Paper
+          through the complexities of cross-border taxation and global compliance. Along the way,
+          he was even designated <strong>The Most Patient Man in New York</strong> in 2024 &mdash;
+          a title that anyone who has worked with Lewis would say is well deserved.
+        </p>
+        <p>
+          Beyond the technical brilliance, those who work alongside Lewis know him for his legendary wit,
+          his warmth, and his genuine care for the people around him. A proud father
+          to his son Will, a self-described foodie, a Spanish speaker, and a connoisseur
+          of a well-crafted cocktail, Lewis brings the same passion to life outside the office
+          as he does inside it. Here's to 50 years of building a better working world &mdash;
+          and enjoying every bite and sip along the way.
+        </p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-number">50</div><div class="stat-label">Years of Life to Celebrate</div></div>
+        <div class="stat-card"><div class="stat-number">5</div><div class="stat-label">Cities: ATL, London, NYC, CLT, Madrid</div></div>
+        <div class="stat-card"><div class="stat-number">UNC</div><div class="stat-label">Tar Heel, Chapel Hill</div></div>
+        <div class="stat-card"><div class="stat-number">2</div><div class="stat-label">Languages: English &amp; Spanish</div></div>
+        <div class="stat-card"><div class="stat-number">EY</div><div class="stat-label">International Tax Partner</div></div>
+        <div class="stat-card"><div class="stat-number">#1</div><div class="stat-label">Most Patient Man in NY, 2024</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline-section">
+    <div class="container reveal">
+      <h2 class="section-title">The Lewis King Journey</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">From the Blue Ridge Mountains to the boardrooms of the world</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="year">Murphy, NC</div>
+          <div class="event-title">Where It All Began</div>
+          <div class="event">Lewis grew up in Murphy, NC alongside his brother Stephen &mdash; a small mountain town that instilled the values of hard work, community, and good Southern hospitality that would define his career.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">Chapel Hill &amp; Madrid</div>
+          <div class="event-title">Tar Heel &amp; World Traveler</div>
+          <div class="event">Headed to UNC Chapel Hill, where he became a lifelong Tar Heel. Spent a semester abroad in Madrid &mdash; picking up fluent Spanish and a taste for international adventure that would shape his entire career.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">Atlanta</div>
+          <div class="event-title">EY &mdash; The Beginning</div>
+          <div class="event">Joined Ernst &amp; Young in Atlanta, quickly establishing himself as a rising talent in the tax practice and beginning a journey that would span continents.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">London</div>
+          <div class="event-title">Crossing the Atlantic</div>
+          <div class="event">Took his talents to EY's London office, gaining invaluable global perspective and deepening his international tax advisory capabilities on the world stage.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">New York</div>
+          <div class="event-title">The Big Apple</div>
+          <div class="event">Brought his global expertise to NYC, navigating some of the most complex international tax engagements in the firm. Officially named <strong>The Most Patient Man in New York</strong> in 2024.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">Charlotte</div>
+          <div class="event-title">Expanding the Reach</div>
+          <div class="event">Continued building deep client relationships at EY's Charlotte office, further expanding his network and advisory reach across the Southeast.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">Partner</div>
+          <div class="event-title">International Tax Partner</div>
+          <div class="event">Achieved the milestone of becoming an International Tax Partner at EY &mdash; a testament to his exceptional client service, technical depth, and legendary patience. Served marquee clients including Cox, Equifax, and International Paper.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="year">Today</div>
+          <div class="event-title">Atlanta &amp; Turning 50</div>
+          <div class="event">Back home in Atlanta, Lewis continues to lead as an International Tax Partner while being a proud father to his son Will. When he's not navigating global tax codes, you'll find him exploring the city's food scene, perfecting his cocktail of choice, or deploying that famous wit.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <div class="container reveal">
+      <h2 class="section-title">Gallery</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Moments and memories celebrating Lewis</p>
+      <div class="gallery-grid" id="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img src="LK image 1.jpg" alt="Lewis King at Oktoberfest">
+          <div class="photo-caption">Prost! Lewis living his best life at Oktoberfest &mdash; lederhosen and all.</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img src="LK 4.jpg" alt="Young Lewis King in Sunday school">
+          <div class="photo-caption">The Murphy, NC days &mdash; little Lewis holding court in Sunday school.</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img src="IMG_8171.jpeg" alt="Lewis King throwback">
+          <div class="photo-caption">A classic throwback &mdash; Lewis in his element!</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img src="IMG_8172.jpeg" alt="Lewis King throwback">
+          <div class="photo-caption">Always the life of the party &mdash; some things never change!</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img src="LK Image2.jpg" alt="Lewis King at theme park with son">
+          <div class="photo-caption">The man himself &mdash; Lewis and Will having a blast.</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img src="LK Image 3.jpg" alt="Lewis King with EY team at Six Feet Under Pub">
+          <div class="photo-caption">Team outing at Six Feet Under Pub &amp; Fish House &mdash; the EY crew and their fearless leader.</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img src="LK8.jpg" alt="Lewis King and Will at Mardi Gras">
+          <div class="photo-caption">Like father, like son &mdash; Lewis and Will decked out in beads at Mardi Gras!</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img src="LK 8.jpg" alt="Lewis and Stephen with red Honda">
+          <div class="photo-caption">The King brothers and their trusty red Honda &mdash; ready to take on the world.</div>
+        </div>
+      </div>
+      <div class="add-photos-bar">
+        <label for="photo-upload" class="add-photos-btn">&#128247;&ensp;Add More Photos</label>
+        <input type="file" id="photo-upload" accept="image/*" multiple style="display:none">
+      </div>
+    </div>
+  </section>
+
+  <section class="guestbook" id="congratulations">
+    <div class="container">
+      <h2 class="section-title reveal">Congratulations, Lewis!</h2>
+      <div class="section-divider reveal"></div>
+      <p class="section-subtitle reveal">Share your congratulations, a fond memory, or a note of celebration for the big 5-0</p>
+      <div class="guestbook-form reveal">
+        <div class="form-group">
+          <label for="msg-name">Your Name</label>
+          <input type="text" id="msg-name" placeholder="e.g., Jane Smith">
+        </div>
+        <div class="form-group">
+          <label for="msg-text">Your Message</label>
+          <textarea id="msg-text" placeholder="Congratulations on 50, Lewis! ..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="submitMessage()">Send Congratulations</button>
+      </div>
+      <div class="messages-container" id="messages-container"></div>
+      <div class="export-bar reveal">
+        <button class="export-btn" onclick="exportMessages()">&#128190; Save Messages to File</button>
+        <button class="export-btn" onclick="importMessages()">&#128194; Load Messages from File</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ey-logo">EY</div>
+    <p>Building a better working world &mdash; one birthday at a time.</p>
+    <p style="margin-top: 0.5rem;">Happy 50th Birthday, Lewis King! &bull; March 27, 2026</p>
+  </footer>
+
+</div>
+
+<script>
+// ═══ COUNTDOWN ═══
+function updateCountdown(){
+  const birthday=new Date('2026-03-27T00:00:00');const now=new Date();const diff=birthday-now;
+  if(diff<=0){document.getElementById('cd-days').textContent='\u{1F389}';document.getElementById('cd-hours').textContent='Happy';document.getElementById('cd-mins').textContent='Birth';document.getElementById('cd-secs').textContent='day!';return;}
+  document.getElementById('cd-days').textContent=Math.floor(diff/(1000*60*60*24));
+  document.getElementById('cd-hours').textContent=String(Math.floor((diff/(1000*60*60))%24)).padStart(2,'0');
+  document.getElementById('cd-mins').textContent=String(Math.floor((diff/(1000*60))%60)).padStart(2,'0');
+  document.getElementById('cd-secs').textContent=String(Math.floor((diff/1000)%60)).padStart(2,'0');
+}
+updateCountdown();setInterval(updateCountdown,1000);
+
+// ═══ CONFETTI ═══
+(function(){
+  const canvas=document.getElementById('confetti-canvas');const ctx=canvas.getContext('2d');
+  canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+  const colors=['#FFE600','#C9A84C','#1B2A4A','#FFFFFF','#FF6B6B','#4ECDC4'];const particles=[];
+  function createBurst(n){for(let i=0;i<n;i++){particles.push({x:Math.random()*canvas.width,y:-20-Math.random()*canvas.height*0.5,w:Math.random()*8+4,h:Math.random()*4+2,color:colors[Math.floor(Math.random()*colors.length)],vy:Math.random()*2+1,vx:(Math.random()-0.5)*2,rotation:Math.random()*360,rv:(Math.random()-0.5)*6,opacity:1});}}
+  createBurst(100);
+  function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.x+=p.vx;p.y+=p.vy;p.vy+=0.02;p.rotation+=p.rv;if(p.y>canvas.height*0.7)p.opacity-=0.01;if(p.opacity<=0||p.y>canvas.height+20){particles.splice(i,1);continue;}ctx.save();ctx.globalAlpha=p.opacity;ctx.translate(p.x,p.y);ctx.rotate((p.rotation*Math.PI)/180);ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();}if(particles.length>0)requestAnimationFrame(animate);}
+  animate();window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+})();
+
+// ═══ SCROLL REVEAL ═══
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+reveals.forEach(el=>observer.observe(el));
+
+// ═══ LIGHTBOX ═══
+function openLightbox(el){if(!el)return;document.getElementById('lightbox-img').src=el.src;document.getElementById('lightbox').classList.add('active');document.body.style.overflow='hidden';}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('active');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+
+// ═══ CONGRATULATIONS ═══
+const STORAGE_KEY='lk50_messages';
+const SEED_MESSAGES=[{"name":"Aaron Topol","text":"Lewis, you are a gentleman, a scholar, and an old man.  You are closer to 100 than 0.  Very impressive that you have made it this long.\n\nI am grateful that you are my partner, and that we have had the pleasure of working together for over 20 years.  You are a mentor, a friend, and a sounding board.  Thank you for your guidance, coaching, and friendship.","date":"3/12/2026, 3:30:12 PM"}];
+
+function getMessages(){try{const s=JSON.parse(localStorage.getItem(STORAGE_KEY));if(s&&s.length>0)return s;}catch{}saveMessages(SEED_MESSAGES);return SEED_MESSAGES;}
+function saveMessages(m){localStorage.setItem(STORAGE_KEY,JSON.stringify(m));}
+function escapeHtml(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+function renderMessages(){
+  const c=document.getElementById('messages-container');const msgs=getMessages();c.innerHTML='';
+  if(msgs.length===0){c.innerHTML='<p style="text-align:center;color:rgba(255,255,255,0.3);font-style:italic;">Be the first to congratulate Lewis!</p>';return;}
+  msgs.slice().reverse().forEach(m=>{const card=document.createElement('div');card.className='message-card';card.innerHTML='<div class="msg-author">'+escapeHtml(m.name)+'</div><div class="msg-text">'+escapeHtml(m.text).replace(/\n/g,'<br>')+'</div><div class="msg-date">'+m.date+'</div>';c.appendChild(card);});
+}
+
+function submitMessage(){
+  const nameEl=document.getElementById('msg-name');const textEl=document.getElementById('msg-text');
+  const name=nameEl.value.trim();const text=textEl.value.trim();
+  if(!name||!text){alert('Please enter both your name and a congratulations message.');return;}
+  const msgs=getMessages();msgs.push({name,text,date:new Date().toLocaleString()});
+  saveMessages(msgs);nameEl.value='';textEl.value='';renderMessages();
+  document.getElementById('messages-container').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+async function exportMessages(){
+  const msgs=getMessages();if(msgs.length===0){alert('No messages yet.');return;}
+  const blob=new Blob([JSON.stringify(msgs,null,2)],{type:'application/json'});
+  if(window.showSaveFilePicker){try{const h=await window.showSaveFilePicker({suggestedName:'lewis-king-50th-messages.json',types:[{description:'JSON',accept:{'application/json':['.json']}}]});const w=await h.createWritable();await w.write(blob);await w.close();alert('Saved!');return;}catch(e){if(e.name==='AbortError')return;}}
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='lewis-king-50th-messages.json';a.click();URL.revokeObjectURL(a.href);
+}
+
+async function importMessages(){
+  if(window.showOpenFilePicker){try{const[h]=await window.showOpenFilePicker({types:[{description:'JSON',accept:{'application/json':['.json']}}]});const f=await h.getFile();const t=await f.text();const i=JSON.parse(t);if(Array.isArray(i))mergeMessages(i);return;}catch(e){if(e.name==='AbortError')return;}}
+  const input=document.createElement('input');input.type='file';input.accept='.json';
+  input.onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const i=JSON.parse(await f.text());if(Array.isArray(i))mergeMessages(i);}catch{alert('Invalid JSON file.');}};
+  input.click();
+}
+
+function mergeMessages(imported){
+  const existing=getMessages();const keys=new Set(existing.map(m=>m.name+'|'+m.text+'|'+m.date));let added=0;
+  imported.forEach(m=>{if(!keys.has(m.name+'|'+m.text+'|'+m.date)){existing.push(m);added++;}});
+  saveMessages(existing);renderMessages();alert('Loaded '+added+' new message(s).');
+}
+
+renderMessages();
+
+// ═══ PHOTO UPLOAD ═══
+document.getElementById('photo-upload').addEventListener('change',function(e){
+  const files=e.target.files;if(!files.length)return;
+  const grid=document.getElementById('gallery-grid');
+  const stored=JSON.parse(localStorage.getItem('lk50_photos')||'[]');
+  Array.from(files).forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=function(ev){
+      const item=document.createElement('div');item.className='gallery-item';
+      item.onclick=function(){openLightbox(this.querySelector('img'));};
+      const img=document.createElement('img');img.src=ev.target.result;img.alt='Photo for Lewis King';
+      item.appendChild(img);grid.appendChild(item);
+      stored.push(ev.target.result);localStorage.setItem('lk50_photos',JSON.stringify(stored));
+      addToSideColumns(ev.target.result);
+    };reader.readAsDataURL(file);
+  });
+});
+
+(function(){
+  const stored=JSON.parse(localStorage.getItem('lk50_photos')||'[]');
+  if(stored.length>0){const grid=document.getElementById('gallery-grid');stored.forEach(src=>{const item=document.createElement('div');item.className='gallery-item';item.onclick=function(){openLightbox(this.querySelector('img'));};const img=document.createElement('img');img.src=src;img.alt='Photo for Lewis King';item.appendChild(img);grid.appendChild(item);});}
+})();
+
+function addToSideColumns(src){
+  ['strip-left','strip-right'].forEach(id=>{const img=document.createElement('img');img.src=src;img.alt='Lewis King photo';img.onclick=function(){openLightbox(this);};document.getElementById(id).appendChild(img);});
+}
+</script>
+</body>
+</html>
